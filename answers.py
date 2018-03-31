@@ -29,15 +29,16 @@ def question2():
 def question3():
     """QUESTION 3: What song uses the word "X" the most time? (X meaning a specific word, choose your own!) columns=['Text']"""
     # Search less strict for all rows where column contains the specific word
-    data = {'Lyrics': df['text']}
+    data = {'Lyrics': df['text'],
+            'Title': df['song']}
     dataframe = pd.DataFrame(data)
-    dataframe['Count'] = dataframe.Lyrics.str.count('world')
-    contain_specific_word = dataframe[dataframe['Lyrics'].str.contains('world', case=False)]
+    dataframe['Count'] = dataframe.Lyrics.str.count('fuck')
+    contain_specific_word = dataframe[dataframe['Lyrics'].str.contains('fuck', case=False)]
     print(contain_specific_word[0:5].sort_values(by=['Count'], ascending=False))
 
 
 def question4():
-    """What is the average number of words per song?"""
+    """QUESTION 4: What is the average number of words per song?"""
     lines = df['text'].str.split().count() #antal af sange
     all_words = sum(df['text'].str.split(expand=True).stack().value_counts()) #antal af ord i sange
     print("All words: {}".format(all_words))
@@ -47,7 +48,7 @@ def question4():
 
 
 def question5():
-    """Show the distribution of number of words in the songs. (Example: how many songs have 5-10 words, 10-20 words)"""
+    """QUESTION 5: Show the distribution of number of words in the songs. (Example: how many songs have 5-10 words, 10-20 words)"""
     song = df['text'].str.split()  # Tager hver sang og splitter alle ordene op med et komma
     list_of_counts = []
     for words in song:
